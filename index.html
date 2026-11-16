@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Vinod Muley - Lead Engineer and Frontend Developer specializing in React.js and React Native." />
+  <title>Vinod Muley | Frontend Developer</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+      background: #08111f; color: #dce7f5; line-height: 1.7;
+    }
+    :root {
+      --bg: #08111f; --card: #101c2d; --card-light: #15243a;
+      --primary: #38bdf8; --secondary: #818cf8; --text: #f8fafc;
+      --muted: #94a3b8; --border: rgba(148, 163, 184, 0.18);
+    }
+    nav {
+      position: fixed; top: 0; width: 100%; z-index: 1000;
+      backdrop-filter: blur(14px); background: rgba(8, 17, 31, 0.8);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-container {
+      width: min(1100px, 90%); margin: auto; height: 70px;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .logo { font-size: 22px; font-weight: 700; color: white; }
+    .logo span { color: var(--primary); }
+    .nav-links { list-style: none; display: flex; gap: 26px; }
+    .nav-links a { text-decoration: none; color: #cbd5e1; transition: 0.3s; }
+    .nav-links a:hover { color: var(--primary); }
+    .hero {
+      min-height: 100vh; width: min(1100px, 90%); margin: auto;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 60px; padding-top: 80px;
+    }
+    .hero-left { max-width: 680px; }
+    .hello { color: var(--primary); font-size: 17px; letter-spacing: 1px; margin-bottom: 10px; }
+    .hero h1 { color: white; font-size: clamp(48px, 7vw, 82px); line-height: 1; margin-bottom: 18px; }
+    .gradient-text {
+      background: linear-gradient(90deg, #38bdf8, #818cf8);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .hero h2 { font-size: clamp(23px, 3vw, 34px); color: #cbd5e1; margin-bottom: 22px; }
+    .hero p { color: var(--muted); font-size: 17px; max-width: 650px; }
+    .buttons { margin-top: 35px; display: flex; gap: 15px; flex-wrap: wrap; }
+    .btn {
+      display: inline-block; padding: 12px 24px; border-radius: 8px;
+      text-decoration: none; transition: 0.3s; font-weight: 600;
+    }
+    .btn-primary { color: #07111f; background: var(--primary); }
+    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(56, 189, 248, 0.3); }
+    .btn-outline { color: var(--primary); border: 1px solid var(--primary); }
+    .btn-outline:hover { background: rgba(56, 189, 248, 0.08); }
+    .code-window {
+      width: 340px; min-width: 340px; background: #0c1727;
+      border: 1px solid var(--border); border-radius: 15px; overflow: hidden;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.4);
+    }
+    .code-header { height: 45px; background: #142136; padding: 15px; display: flex; gap: 8px; }
+    .dot { width: 11px; height: 11px; border-radius: 50%; }
+    .red { background: #ff5f57; } .yellow { background: #febc2e; } .green { background: #28c840; }
+    .code { padding: 25px; font-family: Consolas, monospace; font-size: 14px; color: #94a3b8; line-height: 2; }
+    .purple { color: #c084fc; } .green-text { color: #4ade80; }
+    section { width: min(1100px, 90%); margin: auto; padding: 100px 0; scroll-margin-top: 70px; }
+    .section-title { font-size: 36px; margin-bottom: 45px; color: white; }
+    .section-title span { color: var(--primary); }
+    .about-card {
+      background: linear-gradient(145deg, #0d1929, #111f32);
+      border: 1px solid var(--border); border-radius: 16px; padding: 35px;
+    }
+    .about-card p { color: #aebdd0; font-size: 17px; }
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 18px; }
+    .skill-card {
+      padding: 25px; background: var(--card); border: 1px solid var(--border);
+      border-radius: 12px; transition: 0.3s;
+    }
+    .skill-card:hover { transform: translateY(-6px); border-color: var(--primary); }
+    .skill-card h3 { color: var(--primary); margin-bottom: 15px; }
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .tag { padding: 6px 10px; font-size: 13px; border-radius: 6px; background: #1b2b42; color: #cbd5e1; }
+    .timeline { position: relative; padding-left: 35px; }
+    .timeline::before { content: ""; position: absolute; left: 7px; top: 0; bottom: 0; width: 2px; background: #213451; }
+    .experience {
+      position: relative; background: var(--card); border: 1px solid var(--border);
+      padding: 28px; margin-bottom: 25px; border-radius: 12px;
+    }
+    .experience::before {
+      content: ""; position: absolute; left: -35px; top: 32px; width: 15px; height: 15px;
+      background: var(--primary); border-radius: 100px; box-shadow: 0 0 15px var(--primary);
+    }
+    .experience h3 { color: white; font-size: 21px; }
+    .experience h4 { color: var(--primary); margin: 5px 0; }
+    .date { color: var(--muted); font-size: 14px; }
+    .experience p { margin-top: 12px; color: #aebdd0; }
+    .projects { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+    .project {
+      background: var(--card); border: 1px solid var(--border); border-radius: 14px;
+      padding: 25px; transition: 0.3s;
+    }
+    .project:hover { border-color: #334d70; transform: translateY(-5px); }
+    .project-number { font-size: 13px; color: var(--primary); }
+    .project h3 { color: white; margin: 8px 0 12px; }
+    .project p { color: var(--muted); margin-bottom: 15px; }
+    .contact {
+      text-align: center;
+      background: linear-gradient(135deg, rgba(56,189,248,0.08), rgba(129,140,248,0.08));
+      border: 1px solid var(--border); border-radius: 20px; padding: 60px 25px;
+    }
+    .contact h2 { font-size: 40px; color: white; margin-bottom: 15px; }
+    .contact p { color: var(--muted); margin-bottom: 25px; }
+    footer { text-align: center; color: #64748b; padding: 30px; border-top: 1px solid var(--border); }
+    .hidden { opacity: 0; transform: translateY(30px); transition: 0.7s ease; }
+    .show { opacity: 1; transform: translateY(0); }
+    @media (max-width: 850px) {
+      .hero { flex-direction: column; justify-content: center; align-items: flex-start; gap: 35px; padding: 120px 0 60px; }
+      .code-window { width: 100%; min-width: 0; }
+      .nav-links { display: none; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+      .hidden { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="nav-container">
+      <div class="logo">Vinod<span>.</span></div>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="hero">
+    <div class="hero-left">
+      <div class="hello">HELLO, I'M</div>
+      <h1>Vinod<br><span class="gradient-text">Muley.</span></h1>
+      <h2>Lead Engineer &amp; Frontend Developer</h2>
+      <p>
+        Frontend Developer with around 5 years of experience building
+        scalable web and mobile applications using React.js and React Native.
+        I focus on reusable architecture, performance and great user experiences.
+      </p>
+      <div class="buttons">
+        <a href="#projects" class="btn btn-primary">View My Work</a>
+        <a href="mailto:imvinodmuley@gmail.com" class="btn btn-outline">Contact Me</a>
+      </div>
+    </div>
+
+    <div class="code-window" aria-label="Developer profile code sample">
+      <div class="code-header">
+        <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+      </div>
+      <div class="code">
+        <span class="purple">const</span> developer = {<br>
+        &nbsp;&nbsp;name: <span class="green-text">"Vinod Muley"</span>,<br>
+        &nbsp;&nbsp;role: <span class="green-text">"Lead Engineer"</span>,<br>
+        &nbsp;&nbsp;skills: [<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span class="green-text">"React.js"</span>,<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span class="green-text">"React Native"</span>,<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span class="green-text">"TypeScript"</span><br>
+        &nbsp;&nbsp;],<br>
+        &nbsp;&nbsp;passion: <span class="green-text">"Building great UI"</span><br>
+        };
+      </div>
+    </div>
+  </main>
+
+  <section id="about" class="hidden">
+    <h2 class="section-title">About <span>Me</span></h2>
+    <div class="about-card">
+      <p>
+        I'm a frontend developer focused on building scalable, high-performance web and mobile applications.
+        My experience includes modern frontend architecture, state management with Redux and Context API,
+        reusable component development, REST and GraphQL integrations, responsive UI design and performance optimization.
+      </p>
+    </div>
+  </section>
+
+  <section id="skills" class="hidden">
+    <h2 class="section-title">Technical <span>Skills</span></h2>
+    <div class="skills-grid">
+      <div class="skill-card"><h3>Frontend</h3><div class="tags">
+        <span class="tag">React.js</span><span class="tag">React Native</span><span class="tag">Next.js</span>
+        <span class="tag">TypeScript</span><span class="tag">JavaScript</span><span class="tag">HTML5</span><span class="tag">CSS3</span>
+      </div></div>
+      <div class="skill-card"><h3>State Management</h3><div class="tags">
+        <span class="tag">Redux</span><span class="tag">Redux Toolkit</span><span class="tag">Redux-Saga</span><span class="tag">Context API</span>
+      </div></div>
+      <div class="skill-card"><h3>Backend &amp; APIs</h3><div class="tags">
+        <span class="tag">Node.js</span><span class="tag">REST API</span><span class="tag">GraphQL</span>
+      </div></div>
+      <div class="skill-card"><h3>Cloud &amp; DevOps</h3><div class="tags">
+        <span class="tag">AWS</span><span class="tag">GCP</span><span class="tag">Docker</span><span class="tag">Kubernetes</span>
+      </div></div>
+    </div>
+  </section>
+
+  <section id="experience" class="hidden">
+    <h2 class="section-title">Work <span>Experience</span></h2>
+    <div class="timeline">
+      <div class="experience">
+        <h3>HCL Tech</h3><h4>Lead Engineer</h4>
+        <div class="date">September 2024 - Present | Pune</div>
+        <p>Building scalable React.js and React Native applications, reusable frontend architectures, API integrations, mapping interfaces and data visualization solutions.</p>
+      </div>
+      <div class="experience">
+        <h3>NTT Data Global Delivery Services</h3><h4>Information Technology Sr. Associate Developer</h4>
+        <div class="date">July 2021 - September 2024 | Pune</div>
+        <p>Developed React.js and React Native applications, implemented Redux-based architecture, modernized applications using TypeScript and optimized frontend performance.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects" class="hidden">
+    <h2 class="section-title">Selected <span>Projects</span></h2>
+    <div class="projects">
+      <article class="project">
+        <span class="project-number">01</span><h3>Michilog Bharat</h3>
+        <p>Interactive route-based mapping application for visualizing road anomalies with geospatial filtering and data visualization.</p>
+        <div class="tags"><span class="tag">React.js</span><span class="tag">Leaflet</span><span class="tag">Chart.js</span></div>
+      </article>
+      <article class="project">
+        <span class="project-number">02</span><h3>Astemo</h3>
+        <p>Cross-platform mobile application with reusable UI components, REST/GraphQL APIs and secure authentication.</p>
+        <div class="tags"><span class="tag">React Native</span><span class="tag">GraphQL</span><span class="tag">AWS Amplify</span><span class="tag">Cognito</span></div>
+      </article>
+      <article class="project">
+        <span class="project-number">03</span><h3>Western Union</h3>
+        <p>Scalable frontend and mobile functionality with predictable application state management and asynchronous workflows.</p>
+        <div class="tags"><span class="tag">React</span><span class="tag">React Native</span><span class="tag">Redux</span><span class="tag">Redux-Saga</span></div>
+      </article>
+      <article class="project">
+        <span class="project-number">04</span><h3>IDBSS Logging Platform</h3>
+        <p>React application with global state architecture, debounced search, parallel API calls and optimized UI interactions.</p>
+        <div class="tags"><span class="tag">React.js</span><span class="tag">Redux</span><span class="tag">REST API</span></div>
+      </article>
+    </div>
+  </section>
+
+  <section id="contact" class="hidden">
+    <div class="contact">
+      <h2>Let's Work Together</h2>
+      <p>Have a project or opportunity in mind? Feel free to get in touch.</p>
+      <a href="mailto:imvinodmuley@gmail.com" class="btn btn-primary">imvinodmuley@gmail.com</a>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; <span id="year"></span> Vinod Muley. All rights reserved.</p>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("show");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll(".hidden").forEach((section) => observer.observe(section));
+  </script>
+</body>
+</html>
